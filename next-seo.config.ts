@@ -1,11 +1,11 @@
 const description =
-  "Launch your own fully automated store with Snipcart, Printful, and Next.js";
-const title = "Your SWAG store";
-const url = "https://swag.nextdropshippingstarter.com";
+  "Senior Software Vlogger Merch Shop. T-shirts, Hoodies, Stickers and More.";
+const title = "Senior Software Vlogger Merch";
+const url = "https://shop.seniorsoftwarevlogger.com";
 
 const seo = {
   title,
-  titleTemplate: "%s | Headless Dropshipping Starter",
+  titleTemplate: "%s | Senior Software Vlogger",
   description,
   openGraph: {
     description,
@@ -14,8 +14,8 @@ const seo = {
     url,
   },
   twitter: {
-    handle: "@notrab",
-    site: "@notrab",
+    handle: "@softwarevlogger",
+    site: "@softwarevlogger",
   },
 };
 
