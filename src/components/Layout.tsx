@@ -125,9 +125,14 @@ const Layout = ({ children }) => {
             </a>
           </p>
           <nav className="flex items-center justify-end space-x-3 md:space-x-6">
+            <Link href="/impressum">
+              <a className="text-gray-800 hover:text-blue-600 p-1 transition text-sm">
+                Impressum
+              </a>
+            </Link>
             <Link href="/about">
               <a className="text-gray-800 hover:text-blue-600 p-1 transition text-sm">
-                FAQS
+                About
               </a>
             </Link>
             <Link href="/terms-of-sale">
