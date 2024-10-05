@@ -9,6 +9,7 @@ import VariantPicker from "./VariantPicker";
 const Product = (product) => {
   const { addItem } = useWishlistDispatch();
   const { isSaved } = useWishlistState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { id, name, variants } = product;
   const [firstVariant] = variants;
@@ -70,6 +71,8 @@ const Product = (product) => {
             height={250}
             alt={`${activeVariant.name} ${name}`}
             title={`${activeVariant.name} ${name}`}
+            onClick={() => setIsModalOpen(true)}
+            className="cursor-pointer"
           />
         )}
       </div>
@@ -100,6 +103,27 @@ const Product = (product) => {
           Add to Cart
         </button>
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-4 rounded-lg max-w-3xl max-h-[90vh] overflow-auto">
+            <Image
+              src={activeVariantFile.preview_url}
+              width={800}
+              height={800}
+              alt={`${activeVariant.name} ${name}`}
+              title={`${activeVariant.name} ${name}`}
+              objectFit="contain"
+            />
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="mt-4 px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </article>
   );
 };
