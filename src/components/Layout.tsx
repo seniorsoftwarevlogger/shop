@@ -1,22 +1,32 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import useWishlistState from "../hooks/useWishlistState";
 import useSnipcartCount from "../hooks/useSnipcartCount";
 
+import { useState } from "react";
+
 const Layout = ({ children }) => {
   const { hasItems } = useWishlistState();
   const { cart } = useSnipcartCount();
   const cartHasItems = cart.items.count !== 0;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <>
       <header className="py-6 md:py-12">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
-            <div className="flex-1 flex items-center justify-center md:justify-start">
-              <Link href="/">
-                <a className="flex items-center text-gray-900">
-                  <div className="rounded-full w-12 h-12 flex items-center justify-center mr-0 md:mr-4">
+          <div className="flex flex-row items-center justify-between">
+            {/* Logo and mobile menu */}
+            <div className="w-1/3 flex items-center justify-between md:justify-start">
+              <div className="relative md:hidden">
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="flex items-center text-gray-900"
+                  aria-label="Toggle menu"
+                >
+                  <div className="rounded-full w-12 h-12 flex items-center justify-center mr-2">
                     <Image
                       src="/images/logo.png"
                       alt="Senior Software Vlogger"
@@ -25,27 +35,84 @@ const Layout = ({ children }) => {
                       className="rounded-full"
                     />
                   </div>
-                  <span className="text-lg font-medium hidden md:block">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                {isMenuOpen && (
+                  <div className="absolute top-full left-0 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                    <Link href="/">
+                      <a
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Home
+                      </a>
+                    </Link>
+                    <Link href="/about">
+                      <a
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        About
+                      </a>
+                    </Link>
+                    <Link href="/terms-of-sale">
+                      <a
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Terms of Sale
+                      </a>
+                    </Link>
+                  </div>
+                )}
+              </div>
+              <Link href="/">
+                <a className="hidden md:flex items-center text-gray-900">
+                  <div className="rounded-full w-12 h-12 flex items-center justify-center mr-4">
+                    <Image
+                      src="/images/logo.png"
+                      alt="Senior Software Vlogger"
+                      width={48}
+                      height={48}
+                      className="rounded-full"
+                    />
+                  </div>
+                  <span className="text-lg font-medium">
                     Senior Software Vlogger
                   </span>
                 </a>
               </Link>
             </div>
-            <div className="w-full md:w-1/3">
-              <nav className="flex items-center justify-center md:justify-start space-x-3 md:space-x-6">
-                <Link href="/about">
-                  <a className="text-gray-800 hover:text-blue-600 p-1 transition">
-                    about
-                  </a>
-                </Link>
-                <Link href="/terms-of-sale">
-                  <a className="text-gray-800 hover:text-blue-600 p-1 transition">
-                    terms of sale
-                  </a>
-                </Link>
-              </nav>
-            </div>
-            <div className="w-full md:w-1/3 flex items-center justify-center md:justify-end space-x-3">
+
+            {/* Navigation */}
+            <nav className="hidden md:flex items-center justify-center w-1/3">
+              <Link href="/about">
+                <a className="text-gray-800 hover:text-blue-600 p-1 transition">
+                  About
+                </a>
+              </Link>
+              <Link href="/terms-of-sale">
+                <a className="text-gray-800 hover:text-blue-600 p-1 transition">
+                  Terms of Sale
+                </a>
+              </Link>
+            </nav>
+
+            {/* User actions */}
+            <div className="flex items-center justify-end space-x-3 w-1/3">
               <button
                 className="snipcart-customer-signin appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
                 aria-label="User login"
