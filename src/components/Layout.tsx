@@ -98,7 +98,7 @@ const Layout = ({ children }) => {
             </div>
 
             {/* Navigation */}
-            <nav className="hidden md:flex items-center justify-center w-1/3">
+            <nav className="hidden md:flex items-center justify-center w-1/3 space-x-4">
               <Link href="/about">
                 <a className="text-gray-800 hover:text-blue-600 p-1 transition">
                   About
