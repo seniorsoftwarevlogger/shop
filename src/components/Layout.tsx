@@ -12,25 +12,11 @@ const Layout = ({ children }) => {
     <>
       <header className="py-6 md:py-12">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex items-center justify-between">
-            <div className="md:w-1/3">
-              <nav className="flex items-center justify-start space-x-3 md:space-x-6">
-                <Link href="/about">
-                  <a className="text-gray-800 hover:text-blue-600 p-1 transition">
-                    About
-                  </a>
-                </Link>
-                <Link href="/terms-of-sale">
-                  <a className="text-gray-800 hover:text-blue-600 p-1 transition">
-                    Terms of Sale
-                  </a>
-                </Link>
-              </nav>
-            </div>
-            <div className="flex-1 flex items-center justify-center">
+          <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
+            <div className="flex-1 flex items-center justify-center md:justify-start">
               <Link href="/">
                 <a className="flex items-center text-gray-900">
-                  <div className="rounded-full w-12 h-12 flex items-center justify-center mr-4">
+                  <div className="rounded-full w-12 h-12 flex items-center justify-center mr-0 md:mr-4">
                     <Image
                       src="/images/logo.png"
                       alt="Senior Software Vlogger"
@@ -39,13 +25,27 @@ const Layout = ({ children }) => {
                       className="rounded-full"
                     />
                   </div>
-                  <span className="text-lg font-medium">
+                  <span className="text-lg font-medium hidden md:block">
                     Senior Software Vlogger
                   </span>
                 </a>
               </Link>
             </div>
-            <div className="md:w-1/3 flex items-center justify-end space-x-3 -mr-2.5">
+            <div className="w-full md:w-1/3">
+              <nav className="flex items-center justify-center md:justify-start space-x-3 md:space-x-6">
+                <Link href="/about">
+                  <a className="text-gray-800 hover:text-blue-600 p-1 transition">
+                    about
+                  </a>
+                </Link>
+                <Link href="/terms-of-sale">
+                  <a className="text-gray-800 hover:text-blue-600 p-1 transition">
+                    terms of sale
+                  </a>
+                </Link>
+              </nav>
+            </div>
+            <div className="w-full md:w-1/3 flex items-center justify-center md:justify-end space-x-3">
               <button
                 className="snipcart-customer-signin appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
                 aria-label="User login"
@@ -101,8 +101,8 @@ const Layout = ({ children }) => {
         <div className="max-w-6xl mx-auto px-6">{children}</div>
       </main>
       <footer className="max-w-6xl mx-auto px-6">
-        <div className="py-6 border-t border-gray-100 text-center flex flex-col md:flex-row items-center justify-between">
-          <p className="text-gray-600 text-sm">
+        <div className="py-6 border-t border-gray-100 text-center flex flex-col-reverse md:flex-row items-center justify-between">
+          <p className="text-gray-600 text-xs mt-4 md:mt-0 md:text-sm">
             Powered by
             <a
               href="https://headlessdropshipping.com"
@@ -124,7 +124,7 @@ const Layout = ({ children }) => {
               @notrab
             </a>
           </p>
-          <nav className="flex items-center justify-end space-x-3 md:space-x-6">
+          <nav className="flex items-center justify-center md:justify-end space-x-3 md:space-x-6">
             <Link href="/impressum">
               <a className="text-gray-800 hover:text-blue-600 p-1 transition text-sm">
                 Impressum
