@@ -31,6 +31,7 @@ class MyDocument extends Document {
             id="snipcart"
             data-config-modal-style="side"
             data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY}
+            data-currency="EUR"
             hidden
           >
             <address-fields section="top">
