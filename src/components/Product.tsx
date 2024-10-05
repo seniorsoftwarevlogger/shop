@@ -106,21 +106,54 @@ const Product = (product) => {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-4 rounded-lg max-w-3xl max-h-[90vh] overflow-auto">
-            <Image
-              src={activeVariantFile.preview_url}
-              width={800}
-              height={800}
-              alt={`${activeVariant.name} ${name}`}
-              title={`${activeVariant.name} ${name}`}
-              objectFit="contain"
-            />
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="mt-4 px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"
-            >
-              Close
-            </button>
+          <div className="bg-white p-8 rounded-lg max-w-4xl max-h-[90vh] overflow-auto">
+            <div className="flex flex-col">
+              <div className="mb-6">
+                <Image
+                  src={activeVariantFile.preview_url}
+                  width={700}
+                  height={700}
+                  alt={`${activeVariant.name} ${name}`}
+                  title={`${activeVariant.name} ${name}`}
+                  objectFit="contain"
+                />
+              </div>
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold mb-2">{name}</h2>
+                  <p className="text-xl text-gray-700 mb-4">{formattedPrice}</p>
+                </div>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center">
+                  <div className="mb-4 sm:mb-0 sm:mr-4">
+                    <VariantPicker
+                      value={activeVariantExternalId}
+                      onChange={({ target: { value } }) =>
+                        setActiveVariantExternalId(value)
+                      }
+                      variants={variants}
+                      disabled={oneStyle}
+                    />
+                  </div>
+                  <button
+                    className="snipcart-add-item w-full sm:w-auto transition py-2 px-4 border border-gray-300 hover:border-transparent shadow-sm text-sm font-medium bg-white text-gray-900 focus:text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:outline-none rounded mb-4 sm:mb-0"
+                    data-item-id={activeVariantExternalId}
+                    data-item-price={activeVariant.retail_price}
+                    data-item-url={`/api/products/${activeVariantExternalId}`}
+                    data-item-description={activeVariant.name}
+                    data-item-image={activeVariantFile.preview_url}
+                    data-item-name={name}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="mt-6 px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 self-end"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}
