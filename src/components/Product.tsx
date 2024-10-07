@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import useWishlistDispatch from "../hooks/useWishlistDispatch";
@@ -35,6 +35,22 @@ const Product = (product) => {
   const addToWishlist = () => addItem(product);
 
   const onWishlist = isSaved(id);
+
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsModalOpen(false);
+      }
+    };
+
+    if (isModalOpen) {
+      document.addEventListener("keydown", handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isModalOpen]);
 
   return (
     <article className="border border-gray-200 rounded bg-white flex flex-col relative">
